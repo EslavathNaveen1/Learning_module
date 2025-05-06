@@ -29,7 +29,7 @@ const ManagerUsers = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:5104/api/Qtech/Users');
+                const response = await axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Users');
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -38,7 +38,7 @@ const ManagerUsers = () => {
  
         const fetchEnrollmentRequests = async () => {
             try {
-                const response = await axios.get('http://localhost:5104/api/Qtech/EnrolledPlaylistIds', {
+                const response = await axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/EnrolledPlaylistIds', {
                     params: {
                         userEmail: mail
                     }
@@ -47,8 +47,8 @@ const ManagerUsers = () => {
                 const requestDetails = await Promise.all(
                     response.data.map(async (playlistId) => {
                         try {
-                            const playlistResponse = await axios.get(`http://localhost:5104/api/Qtech/Playlist/${playlistId}`);
-                            const userResponse = await axios.get(`http://localhost:5104/api/Qtech/UserByPlaylist/${playlistId}`);
+                            const playlistResponse = await axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Playlist/${playlistId}`);
+                            const userResponse = await axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/UserByPlaylist/${playlistId}`);
                            
                             return {
                                 playlistId: playlistId,
@@ -71,11 +71,11 @@ const ManagerUsers = () => {
         const fetchAllEnrollments = async () => {
             try {
               
-                const pendingResponse = await axios.get('http://localhost:5104/api/Qtech/enrolleds/pending');
+                const pendingResponse = await axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/enrolleds/pending');
                 const pendingData = pendingResponse.data;
                
               
-                const approvedResponse = await axios.get('http://localhost:5104/api/Qtech/enrolleds/approved');
+                const approvedResponse = await axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/enrolleds/approved');
                 const approvedData = approvedResponse.data;
                
                
@@ -120,7 +120,7 @@ const ManagerUsers = () => {
                 setAllEnrollments(combined);
                
               
-                const playlistsResponse = await axios.get('http://localhost:5104/api/Qtech/playlists');
+                const playlistsResponse = await axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/playlists');
                 const playlistsData = playlistsResponse.data.reduce((acc, playlist) => {
                     acc[playlist.playlistId] = playlist.title;
                     return acc;
@@ -139,7 +139,7 @@ const ManagerUsers = () => {
     const handleDelete = (userid) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this user?");
         if (confirmDelete) {
-            axios.delete(`http://localhost:5104/api/Qtech/Users/${userid}`)
+            axios.delete(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Users/${userid}`)
                 .then(() => {
                     alert("Deleted successfully");
                     setUsers(users.filter(user => user.employeeId !== userid));
@@ -154,7 +154,7 @@ const ManagerUsers = () => {
     };
  
     const handleSave = () => {
-        axios.patch(`http://localhost:5104/api/Qtech/Users/${editUser.employeeId}`, editUser)
+        axios.patch(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Users/${editUser.employeeId}`, editUser)
             .then(() => {
                 alert("Updated successfully");
                 setUsers(users.map(user => user.employeeId === editUser.employeeId ? editUser : user));
@@ -168,10 +168,10 @@ const ManagerUsers = () => {
  
     const handleAcceptRequest = async (playlistId) => {
         try {
-            await axios.post(`http://localhost:5104/api/Qtech/AcceptPlaylistRequest/${playlistId}`);
+            await axios.post(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/AcceptPlaylistRequest/${playlistId}`);
             setEnrollmentRequests(enrollmentRequests.filter(request => request.playlistId !== playlistId));
        
-            const updatedEnrollments = await axios.get('http://localhost:5104/api/Qtech/enrolleds/approved');
+            const updatedEnrollments = await axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/enrolleds/approved');
             const approvedData = updatedEnrollments.data;
            
             const groupedApproved = approvedData.reduce((acc, item) => {
@@ -209,7 +209,7 @@ const ManagerUsers = () => {
  
     const handleRejectRequest = async (playlistId) => {
         try {
-            await axios.post(`http://localhost:5104/api/Qtech/RejectPlaylistRequest/${playlistId}`);
+            await axios.post(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/RejectPlaylistRequest/${playlistId}`);
             setEnrollmentRequests(enrollmentRequests.filter(request => request.playlistId !== playlistId));
             alert('Playlist request rejected successfully');
         } catch (error) {
@@ -220,9 +220,9 @@ const ManagerUsers = () => {
  
     const handleApproveAllPendingEnrollments = async () => {
         try {
-            await axios.put('http://localhost:5104/api/Qtech/enrolleds/approveAll');
+            await axios.put('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/enrolleds/approveAll');
 
-            const approvedResponse = await axios.get('http://localhost:5104/api/Qtech/enrolleds/approved');
+            const approvedResponse = await axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/enrolleds/approved');
             const approvedData = approvedResponse.data;
            
             const groupedApproved = approvedData.reduce((acc, item) => {
@@ -308,7 +308,7 @@ const ManagerUsers = () => {
  
    
             for (const userId of affectedUsers) {
-                const url = `http://localhost:5104/api/Qtech/UnEnroll?userEmail=${userId}&playlistId=${playlistId}`;
+                const url = `https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/UnEnroll?userEmail=${userId}&playlistId=${playlistId}`;
                 await axios.delete(url);
             }
  
@@ -354,7 +354,7 @@ const ManagerUsers = () => {
  
 const handleDecline = async (userEmail, playlistId) => {
     try {
-        const url = `http://localhost:5104/api/Qtech/UnEnroll?userEmail=${userEmail}&playlistId=${playlistId}`;
+        const url = `https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/UnEnroll?userEmail=${userEmail}&playlistId=${playlistId}`;
         await axios.delete(url);
 
         setAllEnrollments(prevData => {

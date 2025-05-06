@@ -8,7 +8,7 @@ const AdminUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:5104/api/Qtech/Users');
+        const response = await axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Users');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);

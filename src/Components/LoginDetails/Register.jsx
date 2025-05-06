@@ -44,7 +44,7 @@ const Register = () => {
     }
     
     try {
-      const checkResponse = await axios.post("http://localhost:5104/api/Qtech/RegisterVerification", { email });
+      const checkResponse = await axios.post("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/RegisterVerification", { email });
       
       if (checkResponse.data.exists) {
         setErrorMessage("You already have an account. Please log in.");
@@ -64,7 +64,7 @@ const Register = () => {
   const handleResendOtp = async () => {
     try {
       
-      await axios.post("http://localhost:5104/api/Qtech/RegisterVerification", { email });
+      await axios.post("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/RegisterVerification", { email });
       alert("OTP resent to your email.");
     } catch (error) {
       console.error("Error resending OTP:", error);
@@ -91,7 +91,7 @@ const Register = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:5104/api/Qtech/Registration", user);
+      const response = await axios.post("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Registration", user);
 
       if (response.data) {
         alert("Registration successful");

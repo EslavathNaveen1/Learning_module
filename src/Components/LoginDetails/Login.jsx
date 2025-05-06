@@ -42,7 +42,7 @@ const Login = () => {
     
 
     try {
-      const response = await axios.post('http://localhost:5104/api/Qtech/login', loginObject);
+      const response = await axios.post('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/login', loginObject);
       
 
       if (response.data.token) {

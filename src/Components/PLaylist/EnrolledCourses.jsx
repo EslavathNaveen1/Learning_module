@@ -776,7 +776,7 @@ const EnrolledCourses = () => {
       }
 
       try {
-        const enrolledResponse = await axios.get(`http://localhost:5104/api/QTech/EnrolledPlaylistIds`, {
+        const enrolledResponse = await axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/QTech/EnrolledPlaylistIds`, {
           params: { userEmail: mail },
           timeout: 10000,
         });
@@ -789,7 +789,7 @@ const EnrolledCourses = () => {
 
         if (enrolledPlaylistIds.length === 0) {
           setEnrolledCourses([]);
-          const allPlaylistsResponse = await axios.get(`http://localhost:5104/api/Qtech/Playlists`, { timeout: 10000 });
+          const allPlaylistsResponse = await axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Playlists`, { timeout: 10000 });
           if (!Array.isArray(allPlaylistsResponse.data)) {
             throw new Error('Invalid response format for all playlists');
           }
@@ -799,7 +799,7 @@ const EnrolledCourses = () => {
         }
 
         const enrolledCoursePromises = enrolledPlaylistIds.map((id) =>
-          axios.get(`http://localhost:5104/api/Qtech/Playlists/${id}`, { timeout: 10000 })
+          axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Playlists/${id}`, { timeout: 10000 })
         );
 
         const enrolledCourseResponses = await Promise.all(enrolledCoursePromises);
@@ -808,8 +808,8 @@ const EnrolledCourses = () => {
 
         const contentPromises = enrolledPlaylistIds.map(async (playlistId) => {
           const [videosResponse, documentsResponse] = await Promise.all([
-            axios.get(`http://localhost:5104/api/Qtech/Videos`, { timeout: 30000 }),
-            axios.get(`http://localhost:5104/api/Qtech/Documents`, { timeout: 30000 }),
+            axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Videos`, { timeout: 30000 }),
+            axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Documents`, { timeout: 30000 }),
           ]);
 
           return {
@@ -829,7 +829,7 @@ const EnrolledCourses = () => {
         }, {});
         setEnrolledContent(contentMap);
 
-        const allPlaylistsResponse = await axios.get(`http://localhost:5104/api/Qtech/Playlists`);
+        const allPlaylistsResponse = await axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Playlists`);
         if (!allPlaylistsResponse.data) {
           throw new Error('Invalid response format for all playlists');
         }
@@ -940,15 +940,15 @@ const EnrolledCourses = () => {
 
     try {
       const playlistId = courseToEnroll.playlistId;
-      await axios.post(`http://localhost:5104/api/QTech/EnrollPlaylists`, {
+      await axios.post(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/QTech/EnrollPlaylists`, {
         userEmail: mail,
         playlistId: playlistId,
         enrollStatus: false,
       });
 
       const [videosResponse, documentsResponse] = await Promise.all([
-        axios.get(`http://localhost:5104/api/Qtech/Videos`, { params: { playlistId: playlistId }, timeout: 15000 }),
-        axios.get(`http://localhost:5104/api/Qtech/Documents`, { params: { playlistId: playlistId }, timeout: 10000 }),
+        axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Videos`, { params: { playlistId: playlistId }, timeout: 15000 }),
+        axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Documents`, { params: { playlistId: playlistId }, timeout: 10000 }),
       ]);
 
       setOtherCourses((prevCourses) => prevCourses.filter((course) => course.playlistId !== playlistId));

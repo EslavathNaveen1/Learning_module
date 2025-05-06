@@ -239,7 +239,7 @@ const AdminVideos = () => {
   const navigate = useNavigate();
   const { role } = useContext(AuthContext);
 
-  // Video player and notes states
+ 
   const [currentVideo, setCurrentVideo] = useState(null);
   const [showVideoPlayer, setShowVideoPlayer] = useState(false);
   const [notes, setNotes] = useState("");
@@ -259,8 +259,8 @@ const AdminVideos = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const playlistsResponse = await axios.get("http://localhost:5104/api/Qtech/Playlists");
-        const videosResponse = await axios.get("http://localhost:5104/api/Qtech/Videos");
+        const playlistsResponse = await axios.get("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Playlists");
+        const videosResponse = await axios.get("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Videos");
 
         setPlaylists(playlistsResponse.data);
         setVideos(videosResponse.data);
@@ -330,7 +330,7 @@ const AdminVideos = () => {
     try {
       console.log("Sending Data:", videoEditData);
 
-      await axios.patch(`http://localhost:5104/api/Qtech/Videos/Edit/${videoId}`, videoEditData, {
+      await axios.patch(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Videos/Edit/${videoId}`, videoEditData, {
         headers: { "Content-Type": "application/json" },
       });
 
@@ -349,7 +349,7 @@ const AdminVideos = () => {
     if (!window.confirm("Are you sure you want to delete this video?")) return;
 
     try {
-      await axios.delete(`http://localhost:5104/api/Qtech/Videos/${videoId}`);
+      await axios.delete(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Videos/${videoId}`);
       setVideos((prevVideos) => prevVideos.filter((video) => video.videoId !== videoId));
     } catch (error) {
       alert("Error deleting video: " + error.message);

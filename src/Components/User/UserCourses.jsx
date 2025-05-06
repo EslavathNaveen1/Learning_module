@@ -29,7 +29,7 @@ const UserCourses = () => {
     const fetchEnrolledPlaylists = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5104/api/Qtech/EnrolledPlaylistIds?userEmail=${encodeURIComponent(mail)}`
+          `https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/EnrolledPlaylistIds?userEmail=${encodeURIComponent(mail)}`
         );
         if (!response.ok) throw new Error("Failed to fetch enrolled playlists");
         const enrolledData = await response.json();
@@ -56,7 +56,7 @@ const UserCourses = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5104/api/Qtech/Playlists");
+        const response = await fetch("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Playlists");
         if (!response.ok) throw new Error("Failed to fetch playlists");
         const data = await response.json();
         setPlaylists(data);
@@ -86,7 +86,7 @@ const UserCourses = () => {
 
   const handleEnroll = async (playlistId) => {
     try {
-      const response = await fetch("http://localhost:5104/api/Qtech/EnrollPlaylists", {
+      const response = await fetch("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/EnrollPlaylists", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

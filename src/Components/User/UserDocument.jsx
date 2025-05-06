@@ -16,10 +16,10 @@ const UserDocument = ({ playlistId, onClose, showAllDocuments = false }) => {
                 
                 if (showAllDocuments) {
                  
-                    response = await axios.get('http://localhost:5104/api/Qtech/documents');
+                    response = await axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/documents');
                 } else if (playlistId) {
                    
-                    response = await axios.get(`http://localhost:5104/api/Qtech/documents/${playlistId}`);
+                    response = await axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/documents/${playlistId}`);
                 }
 
                 setPdfs(response.data);
@@ -62,7 +62,7 @@ const UserDocument = ({ playlistId, onClose, showAllDocuments = false }) => {
     const handleDelete = async (id) => {
         try {
           
-            await axios.delete(`http://localhost:5104/api/Qtech/document/${id}`);
+            await axios.delete(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/document/${id}`);
             setPdfs(pdfs.filter(pdf => pdf.docId !== id));
         } catch (error) {
             console.error('Error deleting PDF:', error);
@@ -76,7 +76,7 @@ const UserDocument = ({ playlistId, onClose, showAllDocuments = false }) => {
         formData.append('file', selectedFile);
 
         try {
-            await axios.put(`http://localhost:5104/api/Qtech/update-pdf/${editId}`, formData, {
+            await axios.put(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/update-pdf/${editId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -86,9 +86,9 @@ const UserDocument = ({ playlistId, onClose, showAllDocuments = false }) => {
           
             let updatedDocsResponse;
             if (showAllDocuments) {
-                updatedDocsResponse = await axios.get('http://localhost:5104/api/Qtech/documents');
+                updatedDocsResponse = await axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/documents');
             } else if (playlistId) {
-                updatedDocsResponse = await axios.get(`http://localhost:5104/api/Qtech/documents/${playlistId}`);
+                updatedDocsResponse = await axios.get(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/documents/${playlistId}`);
             }
             
             setPdfs(updatedDocsResponse.data);

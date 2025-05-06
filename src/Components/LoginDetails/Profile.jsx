@@ -17,7 +17,7 @@ const Profile = () => {
   
   const handleUpdate = async () => {
     try {
-      const response = await axios.put("http://localhost:5104/api/Qtech/update-profile", {
+      const response = await axios.put("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/update-profile", {
         email: mail,
         fname: firstName,
         lname: lastName,

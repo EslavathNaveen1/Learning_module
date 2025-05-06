@@ -24,8 +24,8 @@ const AdminDocs = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const playlistsResponse = await axios.get("http://localhost:5104/api/Qtech/Playlists");
-        const documentsResponse = await axios.get("http://localhost:5104/api/Qtech/documents");
+        const playlistsResponse = await axios.get("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Playlists");
+        const documentsResponse = await axios.get("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/documents");
  
         setPlaylists(playlistsResponse.data.map((playlist, index) => ({
           ...playlist,
@@ -95,10 +95,10 @@ const AdminDocs = () => {
     formData.append('file', selectedFile);
  
     try {
-      await axios.put(`http://localhost:5104/api/Qtech/update-pdf/${editingDocId}`, formData);
+      await axios.put(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/update-pdf/${editingDocId}`, formData);
  
      
-      const updatedDocsResponse = await axios.get('http://localhost:5104/api/Qtech/documents');
+      const updatedDocsResponse = await axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/documents');
       setDocuments(updatedDocsResponse.data);
  
       
@@ -136,7 +136,7 @@ const AdminDocs = () => {
       return;
  
     try {
-      await axios.delete(`http://localhost:5104/api/Qtech/document/${documentId}`);
+      await axios.delete(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/document/${documentId}`);
       setDocuments(documents.filter((doc) => doc.docId !== documentId));
     } catch (error) {
       console.error("Error deleting document:", error.response ? error.response.data : error.message);

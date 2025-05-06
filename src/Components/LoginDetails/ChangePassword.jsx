@@ -51,7 +51,7 @@ const ChangePassword = () => {
     }
     
     try {
-      const response = await axios.post("http://localhost:5104/api/Qtech/forgotpassword", { email });
+      const response = await axios.post("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/forgotpassword", { email });
 
       if (response.status === 200) {
         setEmailValidated(true);
@@ -67,7 +67,7 @@ const ChangePassword = () => {
 
   const onResendOtp = async () => {
     try {
-      const response = await axios.post("http://localhost:5104/api/Qtech/forgotpassword", { email });
+      const response = await axios.post("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/forgotpassword", { email });
       if (response.status === 200) {
         alert("OTP resent to your email");
       }
@@ -91,7 +91,7 @@ const ChangePassword = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5104/api/Qtech/verifyotp", { email, otp, newPassword });
+      const response = await axios.post("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/verifyotp", { email, otp, newPassword });
 
       if (response.status === 200) {
         alert("Password updated successfully");

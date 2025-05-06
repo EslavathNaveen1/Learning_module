@@ -41,12 +41,12 @@ const Playlists = () => {
  
   const fetchAllData = () => {
    
-    axios.get('http://localhost:5104/api/Qtech/Playlists')
+    axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Playlists')
       .then(res => setPlaylists(res.data))
       .catch(err => alert("Error fetching playlists: " + err.message));
  
    
-    axios.get('http://localhost:5104/api/Qtech/Videos')
+    axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Videos')
       .then(res => {
         console.log("Fetched Videos:", res.data);
         setVideos(res.data);
@@ -58,7 +58,7 @@ const Playlists = () => {
       .catch(err => console.error("Error fetching videos:", err));
  
 
-    axios.get('http://localhost:5104/api/Qtech/documents')
+    axios.get('https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/documents')
       .then(res => {
         setDocuments(res.data);
         
@@ -73,7 +73,7 @@ const Playlists = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete this playlist? This action cannot be undone.");
     
     if (confirmDelete) {
-      axios.delete(`http://localhost:5104/api/Qtech/Playlists/${id}`)
+      axios.delete(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Playlists/${id}`)
         .then(() => {
           alert("Deleted successfully");
           setPlaylists(playlists.filter(playlist => playlist.playlistId !== id));
@@ -194,7 +194,7 @@ const Playlists = () => {
   const handleEditSave = async (id) => {
     try {
    
-      await axios.patch(`http://localhost:5104/api/Qtech/Playlists/Edit/${id}`, {
+      await axios.patch(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Playlists/Edit/${id}`, {
         title: editData.title,
         description: editData.description,
         imageUrl: editData.imageUrl
@@ -204,14 +204,14 @@ const Playlists = () => {
       const videoPromises = editData.videos.map(async (video) => {
         if (video.videoId) {
          
-          return axios.patch(`http://localhost:5104/api/Qtech/Videos/Edit/${video.videoId}`, {
+          return axios.patch(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Videos/Edit/${video.videoId}`, {
             title: video.title,
             url: video.url,
             imageUrl: video.imageUrl || "https://via.placeholder.com/150"
           });
         } else if (video.title && video.url) {
          
-          return axios.post("http://localhost:5104/api/Qtech/Videos", {
+          return axios.post("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Videos", {
             playlistId: id,
             title: video.title,
             url: video.url,
@@ -225,7 +225,7 @@ const Playlists = () => {
       const documentPromises = editData.documents.map(async (doc) => {
         if (doc.documentId && !doc.isFileUpdated) {
          
-          return axios.patch(`http://localhost:5104/api/Qtech/Documents/Edit/${doc.documentId}`, {
+          return axios.patch(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Documents/Edit/${doc.documentId}`, {
             title: doc.title,
             content: doc.content
           });
@@ -237,7 +237,7 @@ const Playlists = () => {
           formData.append('file', doc.newFile);
           formData.append('updatedAt', new Date().toISOString());
           
-          return axios.patch(`http://localhost:5104/api/Qtech/Documents/UpdateWithFile/${doc.documentId}`, formData, {
+          return axios.patch(`https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Documents/UpdateWithFile/${doc.documentId}`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -252,7 +252,7 @@ const Playlists = () => {
           formData.append('createdAt', new Date().toISOString());
           formData.append('updatedAt', new Date().toISOString());
           
-          return axios.post("http://localhost:5104/api/Qtech/upload", formData, {
+          return axios.post("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/upload", formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -350,7 +350,7 @@ const Playlists = () => {
     
     try {
    
-      const playlistResponse = await axios.post("http://localhost:5104/api/Qtech/Playlists", {
+      const playlistResponse = await axios.post("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Playlists", {
         title: newPlaylist.title,
         description: newPlaylist.description,
         imageUrl: newPlaylist.imageUrl || "https://via.placeholder.com/150"
@@ -361,7 +361,7 @@ const Playlists = () => {
 
       const videoPromises = newPlaylist.videos.map(async (video) => {
         if (video.title && video.url) {
-          return axios.post("http://localhost:5104/api/Qtech/Videos", {
+          return axios.post("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/Videos", {
             playlistId: newPlaylistId,
             title: video.title,
             url: video.url,
@@ -382,7 +382,7 @@ const Playlists = () => {
           formData.append('createdAt', new Date().toISOString());
           formData.append('updatedAt', new Date().toISOString());
           
-          return axios.post("http://localhost:5104/api/Qtech/upload", formData, {
+          return axios.post("https://learningmodule-dac4fyf9dccpcfh7.centralindia-01.azurewebsites.net/api/Qtech/upload", formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
