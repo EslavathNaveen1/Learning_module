@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import cimage from "../../assets/cimage.jpg";
 
-import python from "../../assets/python.jpg";
+import python from "../../assets/Python.jpg";
 import react from "../../assets/react.jpg";
 import datascience from "../../assets/datascience.jpg";
 import machinelearning from "../../assets/machinelearning.jpg";
