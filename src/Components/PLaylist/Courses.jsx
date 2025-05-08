@@ -14,7 +14,7 @@ const Courses = () => {
     },
     { 
       title: "Python for Beginners",
-      image: "/images/python.jpg" 
+      image: "/images/Python.jpg" 
     },
     { 
       title: "React Development",
